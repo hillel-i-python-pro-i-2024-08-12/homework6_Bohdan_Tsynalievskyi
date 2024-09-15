@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  homework6:
+    build:
+      context: .
+    image: homework6:latest
+    container_name: homework6_container
+    entrypoint: ["python", "./main.py"]

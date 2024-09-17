@@ -9,8 +9,7 @@ WORKDIR ${WORKDIR}
 
 RUN useradd --system --create-home --shell /bin/bash ${USER}
 
-RUN apt update && apt upgrade --yes && \
-    apt install --no-install-recommends --yes gcc
+RUN apt update && apt upgrade --yes
 
 COPY --chown=${USER}:${USER} requirements.txt ${WORKDIR}/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \

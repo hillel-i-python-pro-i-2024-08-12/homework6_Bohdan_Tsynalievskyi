@@ -1,4 +1,8 @@
-from DataProcessing.process_data import DataProvider, get_formatted_output, organize_data
+from DataProcessing.process_data import (
+    DataProvider,
+    get_formatted_output,
+    organize_data,
+)
 
 
 def main():

@@ -1,6 +1,6 @@
 import random
 from dataclasses import dataclass, field
-from typing import TypeAlias, TypedDict
+from typing import Dict, TypeAlias, TypedDict
 
 from faker import Faker
 
@@ -74,7 +74,7 @@ def organize_data(humans: T_HUMANS) -> T_ORGANIZED_DATA:
     Organize data in way, useful for further processing.
     At this stage is not allowed to make output string.
     """
-    groups = {}
+    groups: Dict[str, list[str]] = {}
     for human in humans:
         group_name = human["group"]
         if group_name not in groups:

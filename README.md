@@ -44,5 +44,5 @@ pre-commit install
 
 To manually run pre-commit hooks input:
 ```
-poetry run pre-commit run --all-files
+pre-commit run --all-files
 ```

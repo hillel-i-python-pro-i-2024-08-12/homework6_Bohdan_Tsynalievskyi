@@ -1,17 +1,22 @@
 FROM python:3.12
 
-RUN useradd --create-home --shell /bin/bash appuser
+ENV PYTHONUNBUFFERED=1
 
-WORKDIR /home/appuser
+ARG WORKDIR=/home/appuser
+ARG USER=appuser
 
-COPY requirements.txt .
+WORKDIR ${WORKDIR}
 
-RUN pip install --no-cache-dir --requirement requirements.txt
+RUN useradd --system --create-home --shell /bin/bash ${USER}
 
-COPY main.py .
+RUN apt update && apt upgrade --yes
 
-RUN chown --recursive appuser:appuser /home/appuser
+COPY --chown=${USER}:${USER} requirements.txt ${WORKDIR}/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --requirement ${WORKDIR}/requirements.txt
 
-USER appuser
+COPY --chown=${USER}:${USER} . .
 
-ENTRYPOINT ["python", "./main.py"]
+USER ${USER}
+
+ENTRYPOINT ["python", "main.py"]
